@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Task Manager</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #app {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .filter-button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #ddd;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+
+        .filter-button:hover {
+            background: #bbb;
+        }
+
+        .filter-button.active {
+            background: #007bff;
+            color: white;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        li h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        li p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        li button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        li button:hover {
+            background: #218838;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        p {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Task Manager</h1>
+        <div>
+            <button @click="filterTasks('all')" :class="{ active: filter === 'all' }" class="filter-button">All</button>
+            <button @click="filterTasks('todo')" :class="{ active: filter === 'todo' }" class="filter-button">To Do</button>
+            <button @click="filterTasks('completed')" :class="{ active: filter === 'completed' }" class="filter-button">Completed</button>
+        </div>
+        <ul>
+            <li v-for="task in filteredTasks" :key="task.id" :class="{ completed: task.completed }">
+                <h3>{{ task.title }}</h3>
+                <p>{{ task.description }}</p>
+                <button v-show="!task.completed" @click="markAsCompleted(task.id)">Mark as Completed</button>
+            </li>
+        </ul>
+        <p>Total Tasks: {{ totalTasks }}</p>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    tasks: [
+                        { id: 1, title: "Faire les courses", description: "Acheter des légumes et du lait.", completed: false },
+                        { id: 2, title: "Faire du sport", description: "Courir pendant 30 minutes.", completed: true },
+                        { id: 3, title: "Réviser pour l'examen", description: "Relire le chapitre 5 du manuel.", completed: false }
+                    ],
+                    filter: 'all'
+                };
+            },
+            computed: {
+                filteredTasks() {
+                    if (this.filter === 'todo') return this.tasks.filter(task => !task.completed);
+                    if (this.filter === 'completed') return this.tasks.filter(task => task.completed);
+                    return this.tasks;
+                },
+                totalTasks() {
+                    return this.tasks.length;
+                }
+            },
+            methods: {
+                filterTasks(filter) {
+                    this.filter = filter;
+                },
+                markAsCompleted(taskId) {
+                    const task = this.tasks.find(task => task.id === taskId);
+                    if (task) task.completed = true;
+                },
+                fetchTasks() {
+                    fetch('taskList.json')
+                        .then(response => response.json())
+                        .then(data => { this.tasks = data; });
+                }
+            },
+            mounted() {
+                this.fetchTasks();
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
