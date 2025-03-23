@@ -1,0 +1,36 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "title": "Développeur Full Stack",
+      "description": "Nous recherchons un développeur Full Stack expérimenté pour rejoindre notre équipe dynamique. Vous travaillerez sur des projets passionnants utilisant les dernières technologies.",
+      "salary": 45000,
+      "experience": 3,
+      "createdAt": "2024-03-23T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "Designer UX/UI",
+      "description": "Rejoignez notre équipe de design pour créer des expériences utilisateur exceptionnelles. Vous participerez à la conception de produits innovants.",
+      "salary": 40000,
+      "experience": 1,
+      "createdAt": "2024-03-23T11:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "DevOps Engineer",
+      "description": "Nous cherchons un ingénieur DevOps pour améliorer et maintenir notre infrastructure cloud. Expérience avec AWS et Docker requise.",
+      "salary": 50000,
+      "experience": 4,
+      "createdAt": "2024-03-23T12:00:00.000Z"
+    },
+    {
+      "id": "4aa6",
+      "title": "Fela7",
+      "description": "Houfar",
+      "salary": 20,
+      "experience": 12,
+      "createdAt": "2025-03-23T23:45:05.979Z"
+    }
+  ]
+}
