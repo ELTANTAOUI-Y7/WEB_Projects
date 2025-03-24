@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Getting Started with Vue.js",
+      "body": "Vue.js is a progressive JavaScript framework that makes it easy to build user interfaces. It's designed to be incrementally adoptable, which means you can start using it in your existing projects without having to rewrite everything from scratch.",
+      "tags": ["vue", "javascript", "web"]
+    },
+    {
+      "id": 2,
+      "title": "Understanding Vue Router",
+      "body": "Vue Router is the official router for Vue.js. It deeply integrates with Vue.js core to make building Single Page Applications with Vue.js a breeze.",
+      "tags": ["vue", "router", "spa"]
+    }
+  ]
+} 
